@@ -23,7 +23,7 @@ neg_size = size(NEG_DATA,1);
 TRAIN = [POS_DATA;NEG_DATA];
 
 % PLSA function call on TRAIN_DATA
-run;
+prob_doc = run_PLSA(TRAIN);
 
 % Converting training set into Weka compatible format
 CSVtoARFF (TRAIN, 'train', 'train');

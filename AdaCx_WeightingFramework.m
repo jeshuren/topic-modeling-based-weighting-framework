@@ -28,7 +28,7 @@ imbalance_ratio = (pos_size/neg_size)*imbalance_ratio_constant;
 TRAIN = [POS_DATA;NEG_DATA];
 
 % PLSA function call on TRAIN_DATA
-run;
+prob_doc = run_PLSA(TRAIN);
 
 % Converting training set into Weka compatible format
 CSVtoARFF (TRAIN, 'train', 'train');

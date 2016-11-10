@@ -7,8 +7,7 @@
 * confusionmatStats.m -> Function which computes the Precision, Recall, F-score and Confusion Matrix 
 * CSVtoARFF.m -> Function which converts a CSV file to ARFF file
 * plsa2.m -> Function which implements the PLSA algorithm
-* run.m -> Wrapper Function to call PLSA on the Whole Training Data
-* run2.m -> Wrapper Function to call PLSA on the Majority Instances of the Training Data
+* run_PLSA.m -> Wrapper Function to call PLSA
 * RUSBoost_WeightingFramework.m -> Function which implements the RUSBoost + WeightingFramework Algorithm
 * test_AdaBoost_weightingframework.m -> Wrapper Function to perform 5-fold CV using AdaBoost + WeightingFramework Algorithm
 * test_AdaCx_WeightingFramework.m -> Wrapper Function to perform 5-fold CV using AdaCx + WeightingFramework Algorithm

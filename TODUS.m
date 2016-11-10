@@ -21,7 +21,7 @@ neg_size = size(NEG_DATA,1);
 % together, respectively.
 TRAIN = [POS_DATA;NEG_DATA];
 % PLSA function call on D_maj (Negative Data)
-run2;
+prob_doc = run_PLSA(NEG_DATA);
 % Converting training set into Weka compatible format
 CSVtoARFF (TRAIN, 'train', 'train');
 train_reader = javaObject('java.io.FileReader', 'train.arff');
