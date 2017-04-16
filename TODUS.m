@@ -1,4 +1,4 @@
-function pred = TODUS (TRAIN,TEST,WeakLearn)
+function [pred,score] = TODUS (TRAIN,TEST,WeakLearn)
 % This function implements the TODUS Algorithm.
 % Input: TRAIN = Training data as matrix
 %        TEST = Test data as matrix
@@ -66,6 +66,7 @@ test.setClassIndex(test.numAttributes() - 1);
 pred = zeros(n,1);
 for i = 0 : n-1
     pred(i+1) = model.classifyInstance(test.instance(i));
+    score(i+1,:) = model.distributionForInstance(test.instance(i));
     if pred(i+1) == 0
         pred(i+1) = -1;
     end
