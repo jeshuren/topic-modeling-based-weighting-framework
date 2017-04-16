@@ -16,7 +16,8 @@ for i=1:K
     test_data = data(test,:);
     test_op = data(test,size(test_data,2));
     % Calling TODUS with decision tree as the weak learner
-	prediction = TODUS(train_data,test_data,'tree');
+	[prediction,score] = TODUS(train_data,test_data,'tree');
 	% Storing the Precision and Recall Values
 	output(i) = confusionmatStats(test_op,prediction);
+	[~,~,~,auc(i)] = perfcurve(test_op,score(:,2),'1');
 end

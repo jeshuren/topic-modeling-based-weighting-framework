@@ -1,19 +1,13 @@
 # A novel topic modeling based weighting framework for directed undersampling
 
 ## List of Files
-* AdaBoost_WeightingFramework.m -> Function which implements the AdaBoost + WeightingFramework Algorithm 
-* AdaCost_WeightingFramework.m -> Function which implements the AdaCost + WeightingFramework Algorithm
-* AdaCx_WeightingFramework.m -> Function which implements the AdaCx + WeightingFramework Algorithm
 * confusionmatStats.m -> Function which computes the Precision, Recall, F-score and Confusion Matrix 
 * CSVtoARFF.m -> Function which converts a CSV file to ARFF file
 * plsa2.m -> Function which implements the PLSA algorithm
 * run_PLSA.m -> Wrapper Function to call PLSA
-* RUSBoost_WeightingFramework.m -> Function which implements the RUSBoost + WeightingFramework Algorithm
-* test_AdaBoost_weightingframework.m -> Wrapper Function to perform 5-fold CV using AdaBoost + WeightingFramework Algorithm
-* test_AdaCx_WeightingFramework.m -> Wrapper Function to perform 5-fold CV using AdaCx + WeightingFramework Algorithm
-* test_AdaCost_WeightingFramework.m -> Wrapper Function to perform 5-fold CV using AdaCost + WeightingFramework Algorithm
-* test_RUSBoost_weightingframework.m -> Wrapper Function to perform 5-fold CV using RUSBoost + WeightingFramework Algorithm
-* test_todus.m -> Wrapper Function to perform 5-fold CV using AdaBoost + WeightingFramework Algorithm
+* test_todus.m -> Wrapper Function to perform 5-fold CV TODUS Algorithm
+* test_svm.m -> Wrapper Function to perform 5-fold CV SVM-distance inspired weights
+* svm_distance.py -> Function which claculates the SVM-Distance Based Weights
 * TODUS.m -> Function which implements the TODUS Algorithm
 
 ## Usage
@@ -34,9 +28,20 @@ TODUS Algorithm and its variants are used for efficient learning from unbalanced
 - An ARFF header file corresponding to the CSV file
 		You can refer the format for ARFF header file in [here](http://www.cs.waikato.ac.nz/ml/weka/arff.html)
 		
-### Running the code
+### Running the code for TODUS
 
 * First, specify the location of the CSV file in the wrapper function of the Algorithm to be run</br>
+		file = '**location of the CSV file**'; 
+* Specify the location of the ARFF header in line 14 of CSVtoARFF.m file</br>
+		fid = fopen('**location of the ARFF Header file**','r');
+* Run the wrapper function
+
+### Running the code with svm inspired weights
+
+* Initially, process the dataset to 5-fold CV, so that the filename is of the following format 'dataset_name+train+iteration_no+fold_no'
+(We have provided the files for all the datasets, on which we performed the experiments)
+* In the script.sh file, change the filename and run it
+* Specify the location of the CSV file in the wrapper function of the Algorithm to be run</br>
 		file = '**location of the CSV file**'; 
 * Specify the location of the ARFF header in line 14 of CSVtoARFF.m file</br>
 		fid = fopen('**location of the ARFF Header file**','r');
@@ -52,3 +57,5 @@ Each 1 x 5 vector of output represents,
 * 3rd Column -> Recall values in the form {Recall of Majority class, Recall of Minority Class}
 * 4th Column -> F-score values in the form {F-score of Majority class, F-score of Minority Class}
 * 5th Column -> Group Order
+
+The Area Under the Curve(AUC) values are stored in the auc array.
