@@ -15,6 +15,8 @@ fprintf('Num of document: %d\n', size(termDocMatrix, 2));
 % [prob_term_topic, prob_topic_doc, lls] = plsa(termDocMatrix, numTopic, numIter);
 [prob_term_topic, prob_doc_topic, prob_topic] = plsa2(termDocMatrix, numTopic, numIter);
 
+% compute the data distribution by marginalizing the P(d,z) on z.
 prob_doc = sum((prob_doc_topic * diag(prob_topic)),2);
+
 end 
 
