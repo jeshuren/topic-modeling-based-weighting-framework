@@ -21,7 +21,18 @@ neg_size = size(NEG_DATA,1);
 % together, respectively.
 TRAIN = [POS_DATA;NEG_DATA];
 % PLSA function call on D_maj (Negative Data)
-prob_doc = run_PLSA(NEG_DATA);
+prob_doc = run_PLSA(TRAIN);
+prob_doc_maj = prob_doc(pos_size+1:end);
+prob_doc_min = prob_doc(1:pos_size);
+
+% Min-Max Normalizing the P(D_maj)
+max_val = max(prob_doc_maj);
+min_val = min(prob_doc_maj);
+W_maj = (prob_doc_maj - min_val) / (max_val - min_val);
+
+% Normalizing W_maj
+prob_doc_maj = W_maj./ sum(W_maj);
+ 
 % Converting training set into Weka compatible format
 CSVtoARFF (TRAIN, 'train', 'train');
 train_reader = javaObject('java.io.FileReader', 'train.arff');
@@ -31,8 +42,8 @@ train.setClassIndex(train.numAttributes() - 1);
 % Making negative data, same size as of POS_DATA
 neg_equal_size = pos_size;
 
-% Undersampling the NEG_DATA based on P(d)
-RESAM_NEG = NEG_DATA(randsample(length(NEG_DATA),neg_equal_size,true,prob_doc),:);
+% Undersampling the NEG_DATA based on W_maj
+RESAM_NEG = NEG_DATA(randsample(length(NEG_DATA),neg_equal_size,true,prob_doc_maj),:);
 
 RESAMPLED = [POS_DATA;RESAM_NEG];
   
